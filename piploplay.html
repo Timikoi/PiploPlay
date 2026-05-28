@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>PiploPlay</title>
+
+  <!-- Les styles arriveront en PARTIE 2 -->
+  <style id="piploplay-styles">/* ------------------------------ */
+/*        PIPLOPLAY THEME         */
+/* ------------------------------ */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* THEME VARIABLES */
+body.theme-dark {
+  --bg: #0f0f0f;
+  --bg2: #1a1a1a;
+  --bg3: #222;
+  --text: #fff;
+  --text2: #ccc;
+  --border: #333;
+  --accent: #007bff;
+}
+
+body.theme-light {
+  --bg: #f7f7f7;
+  --bg2: #fff;
+  --bg3: #eee;
+  --text: #000;
+  --text2: #444;
+  --border: #ddd;
+  --accent: #007bff;
+}
+
+/* ------------------------------ */
+/*            HEADER              */
+/* ------------------------------ */
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  border-radius: 6px 0 0 6px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: var(--bg3);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ------------------------------ */
+/*            LAYOUT              */
+/* ------------------------------ */
+
+#layout {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+/* ------------------------------ */
+/*            SIDEBAR             */
+/* ------------------------------ */
+
+#sidebar {
+  width: 220px;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: var(--text2);
+  transition: 0.2s;
+}
+
+.sidebar-item:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.sidebar-section {
+  padding: 12px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-top: 10px;
+}
+
+/* ------------------------------ */
+/*            CONTENT             */
+/* ------------------------------ */
+
+#content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* TITRES */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ------------------------------ */
+/*          VIDEO GRID            */
+/* ------------------------------ */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.video-card {
+  cursor: pointer;
+}
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-color: #000;
+  margin-bottom: 10px;
+}
+
+.video-info {
+  display: flex;
+  gap: 10px;
+}
+
+.video-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.video-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.video-meta {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+/* ------------------------------ */
+/*          WATCH PAGE            */
+/* ------------------------------ */
+
+.player-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.player-wrapper iframe,
+.player-wrapper video {
+  width: 100%;
+  height: 100%;
+}
+
+.watch-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 15px 0 10px;
+}
+
+.watch-meta-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text2);
+  margin-bottom: 15px;
+}
+
+/* ------------------------------ */
+/*          CHANNEL PAGE          */
+/* ------------------------------ */
+
+.channel-banner {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #444);
+  margin-bottom: 20px;
+}
+
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channel-avatar-big {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.channel-name {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.channel-tabs {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.channel-tab {
+  padding-bottom: 10px;
+  cursor: pointer;
+  color: var(--text2);
+}
+
+.channel-tab.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ------------------------------ */
+/*          STUDIO PAGE           */
+/* ------------------------------ */
+
+.studio-card {
+  background: var(--bg2);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.studio-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* ------------------------------ */
+/*          FORMS / INPUTS        */
+/* ------------------------------ */
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  margin-bottom: 15px;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* ------------------------------ */
+/*          RESPONSIVE            */
+/* ------------------------------ */
+
+@media (max-width: 800px) {
+  #sidebar {
+    display: none;
+  }
+}
+</style>
+</head>
+
+<body class="theme-dark">
+  <div id="app">
+
+    <!-- HEADER -->
+    <header id="header">
+      <div class="logo" onclick="navigateHome()">
+        <span class="logo-icon">▶</span>
+        <span class="logo-text">PiploPlay</span>
+      </div>
+
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Rechercher vidéos ou chaînes"
+               onkeydown="if(event.key==='Enter'){performSearch();}">
+        <button onclick="performSearch()">🔍</button>
+      </div>
+
+      <div class="header-right">
+        <button class="btn" onclick="toggleTheme()">🌗</button>
+        <button class="btn" onclick="navigateUpload()">⬆️ Upload</button>
+        <button class="btn" onclick="navigateLogin()">👤</button>
+      </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <div id="layout">
+      <nav id="sidebar">
+        <div class="sidebar-item" onclick="navigateHome()">🏠 Accueil</div>
+        <div class="sidebar-item" onclick="navigateSubscriptions()">⭐ Abonnements</div>
+        <div class="sidebar-item" onclick="navigateLibrary()">📚 Bibliothèque</div>
+        <div class="sidebar-item" onclick="navigateHistory()">🕒 Historique</div>
+
+        <div class="sidebar-section">Créateur</div>
+        <div class="sidebar-item" onclick="navigateStudio()">🎬 Studio</div>
+        <div class="sidebar-item" onclick="navigateYourChannel()">📺 Ma chaîne</div>
+      </nav>
+
+      <main id="content">
+        <!-- Le contenu dynamique sera injecté ici -->
+      </main>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT PRINCIPAL (les parties 3 à 10 viendront ici) -->
+  <script id="piploplay-script">/* --------------------------------------------- */
+/*                PIPLOPLAY PRO                  */
+/*           PARTIE 3 — SYSTEME COMPTES          */
+/* --------------------------------------------- */
+
+/* STORAGE HELPERS */
+function load(key, def) {
+  try {
+    return JSON.parse(localStorage.getItem(key)) ?? def;
+  } catch {
+    return def;
+  }
+}
+
+function save(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+/* USERS STRUCTURE
+users = [
+  {
+    username: "iyad",
+    password: "1234",
+    channelName: "IyadTV",
+    avatar: null,
+    banner: null,
+    subscribers: [],
+    videos: []
+  }
+]
+*/
+
+let users = load("piploplay_users", []);
+let currentUser = load("piploplay_currentUser", null);
+
+/* --------------------------------------------- */
+/*                NAVIGATION LOGIN                */
+/* --------------------------------------------- */
+
+function navigateLogin() {
+  renderLogin();
+}
+
+function navigateRegister() {
+  renderRegister();
+}
+
+function logout() {
+  currentUser = null;
+  save("piploplay_currentUser", null);
+  alert("Déconnecté !");
+  navigateHome();
+}
+
+/* --------------------------------------------- */
+/*                RENDER LOGIN PAGE               */
+/* --------------------------------------------- */
+
+function renderLogin() {
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <h2>Connexion</h2>
+
+    <input id="loginUser" placeholder="Nom d'utilisateur">
+    <input id="loginPass" type="password" placeholder="Mot de passe">
+
+    <button class="btn" onclick="login()">Se connecter</button>
+
+    <p style="margin-top:10px;color:var(--text2)">
+      Pas de compte ?
+      <span style="color:var(--accent);cursor:pointer" onclick="navigateRegister()">Créer un compte</span>
+    </p>
+  `;
+}
+
+/* --------------------------------------------- */
+/*                RENDER REGISTER PAGE            */
+/* --------------------------------------------- */
+
+function renderRegister() {
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <h2>Créer un compte</h2>
+
+    <input id="regUser" placeholder="Nom d'utilisateur">
+    <input id="regPass" type="password" placeholder="Mot de passe">
+    <input id="regChannel" placeholder="Nom de la chaîne">
+
+    <button class="btn" onclick="register()">Créer</button>
+
+    <p style="margin-top:10px;color:var(--text2)">
+      Déjà un compte ?
+      <span style="color:var(--accent);cursor:pointer" onclick="navigateLogin()">Se connecter</span>
+    </p>
+  `;
+}
+
+/* --------------------------------------------- */
+/*                REGISTER FUNCTION               */
+/* --------------------------------------------- */
+
+function register() {
+  const username = document.getElementById("regUser").value.trim();
+  const password = document.getElementById("regPass").value.trim();
+  const channelName = document.getElementById("regChannel").value.trim();
+
+  if (!username || !password || !channelName) {
+    alert("Remplis tous les champs !");
+    return;
+  }
+
+  if (users.find(u => u.username === username)) {
+    alert("Ce nom d'utilisateur existe déjà !");
+    return;
+  }
+
+  const newUser = {
+    username,
+    password,
+    channelName,
+    avatar: null,
+    banner: null,
+    subscribers: [],
+    videos: []
+  };
+
+  users.push(newUser);
+  save("piploplay_users", users);
+
+  currentUser = username;
+  save("piploplay_currentUser", username);
+
+  alert("Compte créé !");
+  navigateHome();
+}
+
+/* --------------------------------------------- */
+/*                LOGIN FUNCTION                  */
+/* --------------------------------------------- */
+
+function login() {
+  const username = document.getElementById("loginUser").value.trim();
+  const password = document.getElementById("loginPass").value.trim();
+
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (!user) {
+    alert("Identifiants incorrects");
+    return;
+  }
+
+  currentUser = username;
+  save("piploplay_currentUser", username);
+
+  alert("Connecté !");
+  navigateHome();
+}
+
+/* --------------------------------------------- */
+/*         GET CURRENT USER OBJECT                */
+/* --------------------------------------------- */
+
+function getCurrentUser() {
+  if (!currentUser) return null;
+  return users.find(u => u.username === currentUser) || null;
+}
+
+/* --------------------------------------------- */
+/*         UPDATE USER IN STORAGE                 */
+/* --------------------------------------------- */
+
+function updateUser(user) {
+  const index = users.findIndex(u => u.username === user.username);
+  if (index !== -1) {
+    users[index] = user;
+    save("piploplay_users", users);
+  }
+}/* --------------------------------------------- */
+/*                PIPLOPLAY PRO                  */
+/*        PARTIE 4 — GESTION DES CHAINES         */
+/* --------------------------------------------- */
+
+/* --------------------------------------------- */
+/*        NAVIGATION VERS UNE CHAINE             */
+/* --------------------------------------------- */
+
+function openChannel(username) {
+  const user = users.find(u => u.username === username);
+  if (!user) {
+    alert("Chaîne introuvable");
+    return;
+  }
+  renderChannelPage(user);
+}
+
+/* --------------------------------------------- */
+/*        RENDER PAGE CHAINE                     */
+/* --------------------------------------------- */
+
+function renderChannelPage(user) {
+  const content = document.getElementById("content");
+
+  const isMe = currentUser === user.username;
+  const isSubscribed = currentUser && user.subscribers.includes(currentUser);
+
+  const totalViews = user.videos.reduce((sum, v) => sum + (v.views || 0), 0);
+
+  content.innerHTML = `
+    <div class="channel-banner" style="background: ${
+      user.banner ? `url('${user.banner}') center/cover` : "linear-gradient(135deg, var(--accent), #444)"
+    }"></div>
+
+    <div class="channel-header">
+      <div style="display:flex;align-items:center;gap:15px;">
+        <div class="channel-avatar-big" style="
+          background:${user.avatar ? `url('${user.avatar}') center/cover` : "var(--accent)"};
+        "></div>
+
+        <div>
+          <div class="channel-name">${user.channelName}</div>
+          <div style="color:var(--text2);font-size:14px;">
+            @${user.username} • ${user.subscribers.length} abonnés • ${user.videos.length} vidéos • ${totalViews} vues
+          </div>
+        </div>
+      </div>
+
+      <div>
+        ${
+          isMe
+            ? `<button class="btn" onclick="navigateStudio()">Modifier la chaîne</button>`
+            : currentUser
+              ? `<button class="btn" onclick="toggleSubscribe('${user.username}')">
+                   ${isSubscribed ? "Abonné" : "S'abonner"}
+                 </button>`
+              : `<button class="btn" onclick="navigateLogin()">Se connecter</button>`
+        }
+      </div>
+    </div>
+
+    <div class="channel-tabs">
+      <div class="channel-tab active" onclick="renderChannelVideos('${user.username}')">Vidéos</div>
+      <div class="channel-tab" onclick="renderChannelAbout('${user.username}')">À propos</div>
+    </div>
+
+    <div id="channelContent"></div>
+  `;
+
+  renderChannelVideos(user.username);
+}
+
+/* --------------------------------------------- */
+/*        ONGLET : VIDEOS DE LA CHAINE           */
+/* --------------------------------------------- */
+
+function renderChannelVideos(username) {
+  const user = users.find(u => u.username === username);
+  const container = document.getElementById("channelContent");
+
+  if (!user) return;
+
+  container.innerHTML = `
+    <div class="video-grid">
+      ${
+        user.videos.length === 0
+          ? "<p>Aucune vidéo pour l'instant.</p>"
+          : user.videos
+              .map(
+                v => `
+        <div class="video-card" onclick="openVideo('${username}', '${v.id}')">
+          <div class="thumbnail" style="background-image:url('${v.thumbnail}')"></div>
+          <div class="video-info">
+            <div class="video-avatar"></div>
+            <div>
+              <div class="video-title">${v.title}</div>
+              <div class="video-meta">${v.views} vues</div>
+            </div>
+          </div>
+        </div>
+      `
+              )
+              .join("")
+      }
+    </div>
+  `;
+}
+
+/* --------------------------------------------- */
+/*        ONGLET : A PROPOS                      */
+/* --------------------------------------------- */
+
+function renderChannelAbout(username) {
+  const user = users.find(u => u.username === username);
+  const container = document.getElementById("channelContent");
+
+  container.innerHTML = `
+    <div style="padding:20px;font-size:15px;">
+      <h3>Description</h3>
+      <p style="margin-top:10px;color:var(--text2);">
+        ${
+          user.description
+            ? user.description.replace(/\n/g, "<br>")
+            : "Aucune description pour cette chaîne."
+        }
+      </p>
+    </div>
+  `;
+}
+
+/* --------------------------------------------- */
+/*        ABONNEMENTS ENTRE UTILISATEURS         */
+/* --------------------------------------------- */
+
+function toggleSubscribe(username) {
+  if (!currentUser) {
+    alert("Connecte-toi pour t'abonner !");
+    return;
+  }
+
+  const target = users.find(u => u.username === username);
+  const me = getCurrentUser();
+
+  if (!target || !me) return;
+
+  const index = target.subscribers.indexOf(me.username);
+
+  if (index === -1) {
+    target.subscribers.push(me.username);
+  } else {
+    target.subscribers.splice(index, 1);
+  }
+
+  updateUser(target);
+
+  renderChannelPage(target);
+}
+
+/* --------------------------------------------- */
+/*        NAVIGATION : MA CHAINE                 */
+/* --------------------------------------------- */
+
+function navigateYourChannel() {
+  if (!currentUser) {
+    alert("Connecte-toi pour voir ta chaîne !");
+    navigateLogin();
+    return;
+  }
+  openChannel(currentUser);
+}
+/* --------------------------------------------- */
+/*                PARTIE 5 — UPLOAD              */
+/* --------------------------------------------- */
+
+function navigateUpload() {
+  if (!currentUser) {
+    alert("Connecte-toi pour uploader une vidéo !");
+    navigateLogin();
+    return;
+  }
+
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <h2>Uploader une vidéo</h2>
+
+    <input type="file" id="uploadFile" accept="video/*">
+    <input id="uploadTitle" placeholder="Titre de la vidéo">
+    <textarea id="uploadDesc" placeholder="Description"></textarea>
+
+    <button class="btn" onclick="uploadVideo()">Publier</button>
+  `;
+}
+
+function uploadVideo() {
+  const fileInput = document.getElementById("uploadFile");
+  const title = document.getElementById("uploadTitle").value.trim();
+  const desc = document.getElementById("uploadDesc").value.trim();
+
+  if (!fileInput.files.length) {
+    alert("Choisis une vidéo !");
+    return;
+  }
+  if (!title) {
+    alert("Ajoute un titre !");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const videoURL = URL.createObjectURL(file);
+
+  const videoElement = document.createElement("video");
+  videoElement.src = videoURL;
+  videoElement.currentTime = 1;
+
+  videoElement.onloadeddata = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 480;
+    canvas.height = 270;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    const thumbnail = canvas.toDataURL("image/jpeg");
+
+    const user = getCurrentUser();
+
+    const newVideo = {
+      id: "vid_" + Date.now(),
+      title,
+      description: desc,
+      thumbnail,
+      file: videoURL,
+      views: 0,
+      likes: [],
+      comments: [],
+      date: new Date().toLocaleDateString("fr-FR")
+    };
+
+    user.videos.push(newVideo);
+    updateUser(user);
+
+    alert("Vidéo publiée !");
+    openChannel(user.username);
+  };
+}
+/* --------------------------------------------- */
+/*                PARTIE 6 — VIDEO               */
+/* --------------------------------------------- */
+
+function openVideo(username, videoId) {
+  const user = users.find(u => u.username === username);
+  if (!user) return;
+
+  const video = user.videos.find(v => v.id === videoId);
+  if (!video) return;
+
+  video.views++;
+  updateUser(user);
+
+  const content = document.getElementById("content");
+
+  const isLiked = currentUser && video.likes.includes(currentUser);
+
+  content.innerHTML = `
+    <div class="player-wrapper">
+      <video controls src="${video.file}"></video>
+    </div>
+
+    <div class="watch-title">${video.title}</div>
+
+    <div class="watch-meta-row">
+      <div>${video.views} vues • ${video.date}</div>
+
+      <div style="display:flex;gap:10px;">
+        <button class="btn" onclick="toggleLike('${username}','${videoId}')">
+          👍 ${isLiked ? "Je n'aime plus" : "J'aime"}
+        </button>
+        <button class="btn" onclick="openChannel('${username}')">📺 Voir la chaîne</button>
+      </div>
+    </div>
+
+    <div class="studio-card">
+      <div class="studio-title">Description</div>
+      <p style="color:var(--text2)">${video.description.replace(/\n/g,"<br>")}</p>
+    </div>
+
+    <h3>Commentaires</h3>
+    <input id="commentInput" placeholder="Ajouter un commentaire…"
+           onkeydown="if(event.key==='Enter'){addComment('${username}','${videoId}')}">
+
+    <div id="commentsList">
+      ${video.comments.map(c => `
+        <div style="margin:10px 0;">
+          <b>${c.author}</b> — <span style="color:var(--text2)">${c.date}</span><br>
+          ${c.text}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function toggleLike(username, videoId) {
+  const user = users.find(u => u.username === username);
+  const video = user.videos.find(v => v.id === videoId);
+
+  if (!currentUser) {
+    alert("Connecte-toi pour liker !");
+    return;
+  }
+
+  const index = video.likes.indexOf(currentUser);
+
+  if (index === -1) video.likes.push(currentUser);
+  else video.likes.splice(index, 1);
+
+  updateUser(user);
+  openVideo(username, videoId);
+}
+
+function addComment(username, videoId) {
+  const user = users.find(u => u.username === username);
+  const video = user.videos.find(v => v.id === videoId);
+
+  const input = document.getElementById("commentInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  video.comments.push({
+    author: currentUser || "Anonyme",
+    text,
+    date: new Date().toLocaleString("fr-FR")
+  });
+
+  updateUser(user);
+  openVideo(username, videoId);
+}/* --------------------------------------------- */
+/*        PARTIE 7 — CHAINE (suite)              */
+/* --------------------------------------------- */
+
+function navigateSubscriptions() {
+  if (!currentUser) {
+    alert("Connecte-toi pour voir tes abonnements !");
+    navigateLogin();
+    return;
+  }
+
+  const me = getCurrentUser();
+  const content = document.getElementById("content");
+
+  const subs = users.filter(u => u.subscribers.includes(me.username));
+
+  content.innerHTML = `
+    <h2>Abonnements</h2>
+
+    <div class="video-grid">
+      ${
+        subs.length === 0
+          ? "<p>Aucune chaîne suivie.</p>"
+          : subs.map(u => `
+            <div class="video-card" onclick="openChannel('${u.username}')">
+              <div class="thumbnail" style="background:var(--accent)"></div>
+              <div class="video-info">
+                <div class="video-avatar"></div>
+                <div>
+                  <div class="video-title">${u.channelName}</div>
+                  <div class="video-meta">@${u.username}</div>
+                </div>
+              </div>
+            </div>
+          `).join("")
+      }
+    </div>
+  `;
+}
+
+function navigateLibrary() {
+  if (!currentUser) {
+    alert("Connecte-toi pour voir ta bibliothèque !");
+    navigateLogin();
+    return;
+  }
+
+  const me = getCurrentUser();
+  const content = document.getElementById("content");
+
+  const likedVideos = [];
+
+  users.forEach(u => {
+    u.videos.forEach(v => {
+      if (v.likes.includes(me.username)) {
+        likedVideos.push({ user: u, video: v });
+      }
+    });
+  });
+
+  content.innerHTML = `
+    <h2>Vidéos aimées</h2>
+
+    <div class="video-grid">
+      ${
+        likedVideos.length === 0
+          ? "<p>Aucune vidéo aimée.</p>"
+          : likedVideos.map(obj => `
+            <div class="video-card" onclick="openVideo('${obj.user.username}','${obj.video.id}')">
+              <div class="thumbnail" style="background-image:url('${obj.video.thumbnail}')"></div>
+              <div class="video-info">
+                <div class="video-avatar"></div>
+                <div>
+                  <div class="video-title">${obj.video.title}</div>
+                  <div class="video-meta">@${obj.user.username}</div>
+                </div>
+              </div>
+            </div>
+          `).join("")
+      }
+    </div>
+  `;
+}
+/* --------------------------------------------- */
+/*        PARTIE 8 — STUDIO CREATEUR             */
+/* --------------------------------------------- */
+
+function navigateStudio() {
+  if (!currentUser) {
+    alert("Connecte-toi !");
+    navigateLogin();
+    return;
+  }
+
+  const user = getCurrentUser();
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <h2>Studio créateur</h2>
+
+    <div class="studio-card">
+      <div class="studio-title">Nom de la chaîne</div>
+      <input id="studioName" value="${user.channelName}">
+      <button class="btn" onclick="saveChannelName()">Enregistrer</button>
+    </div>
+
+    <div class="studio-card">
+      <div class="studio-title">Description</div>
+      <textarea id="studioDesc">${user.description || ""}</textarea>
+      <button class="btn" onclick="saveChannelDesc()">Enregistrer</button>
+    </div>
+
+    <div class="studio-card">
+      <div class="studio-title">Avatar</div>
+      <input type="file" id="studioAvatar" accept="image/*">
+      <button class="btn" onclick="saveAvatar()">Changer</button>
+    </div>
+
+    <div class="studio-card">
+      <div class="studio-title">Bannière</div>
+      <input type="file" id="studioBanner" accept="image/*">
+      <button class="btn" onclick="saveBanner()">Changer</button>
+    </div>
+
+    <h3>Vos vidéos</h3>
+    <div id="studioVideos"></div>
+  `;
+
+  renderStudioVideos();
+}
+
+function saveChannelName() {
+  const user = getCurrentUser();
+  user.channelName = document.getElementById("studioName").value.trim();
+  updateUser(user);
+  alert("Nom mis à jour !");
+}
+
+function saveChannelDesc() {
+  const user = getCurrentUser();
+  user.description = document.getElementById("studioDesc").value.trim();
+  updateUser(user);
+  alert("Description mise à jour !");
+}
+
+function saveAvatar() {
+  const file = document.getElementById("studioAvatar").files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const user = getCurrentUser();
+    user.avatar = reader.result;
+    updateUser(user);
+    alert("Avatar mis à jour !");
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveBanner() {
+  const file = document.getElementById("studioBanner").files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const user = getCurrentUser();
+    user.banner = reader.result;
+    updateUser(user);
+    alert("Bannière mise à jour !");
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderStudioVideos() {
+  const user = getCurrentUser();
+  const container = document.getElementById("studioVideos");
+
+  container.innerHTML = user.videos
+    .map(
+      v => `
+      <div class="studio-card">
+        <div class="studio-title">${v.title}</div>
+        <button class="btn" onclick="openVideo('${user.username}','${v.id}')">Voir</button>
+        <button class="btn" onclick="deleteVideo('${v.id}')">Supprimer</button>
+      </div>
+    `
+    )
+    .join("");
+}
+
+function deleteVideo(id) {
+  const user = getCurrentUser();
+  user.videos = user.videos.filter(v => v.id !== id);
+  updateUser(user);
+  navigateStudio();
+}
+/* --------------------------------------------- */
+/*        PARTIE 9 — RECHERCHE AVANCÉE           */
+/* --------------------------------------------- */
+
+function performSearch() {
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const content = document.getElementById("content");
+
+  if (!q) {
+    navigateHome();
+    return;
+  }
+
+  const videoResults = [];
+  const channelResults = [];
+
+  users.forEach(u => {
+    if (u.channelName.toLowerCase().includes(q) || u.username.toLowerCase().includes(q)) {
+      channelResults.push(u);
+    }
+
+    u.videos.forEach(v => {
+      if (v.title.toLowerCase().includes(q)) {
+        videoResults.push({ user: u, video: v });
+      }
+    });
+  });
+
+  content.innerHTML = `
+    <h2>Résultats pour "${q}"</h2>
+
+    <h3>Chaînes</h3>
+    <div class="video-grid">
+      ${
+        channelResults.length === 0
+          ? "<p>Aucune chaîne trouvée.</p>"
+          : channelResults
+              .map(
+                u => `
+        <div class="video-card" onclick="openChannel('${u.username}')">
+          <div class="thumbnail" style="background:var(--accent)"></div>
+          <div class="video-info">
+            <div class="video-avatar"></div>
+            <div>
+              <div class="video-title">${u.channelName}</div>
+              <div class="video-meta">@${u.username}</div>
+            </div>
+          </div>
+        </div>
+      `
+              )
+              .join("")
+      }
+    </div>
+
+    <h3>Vidéos</h3>
+    <div class="video-grid">
+      ${
+        videoResults.length === 0
+          ? "<p>Aucune vidéo trouvée.</p>"
+          : videoResults
+              .map(
+                obj => `
+        <div class="video-card" onclick="openVideo('${obj.user.username}','${obj.video.id}')">
+          <div class="thumbnail" style="background-image:url('${obj.video.thumbnail}')"></div>
+          <div class="video-info">
+            <div class="video-avatar"></div>
+            <div>
+              <div class="video-title">${obj.video.title}</div>
+              <div class="video-meta">@${obj.user.username}</div>
+            </div>
+          </div>
+        </div>
+      `
+              )
+              .join("")
+      }
+    </div>
+  `;
+}
+/* --------------------------------------------- */
+/*        PARTIE 10 — INITIALISATION             */
+/* --------------------------------------------- */
+
+function navigateHome() {
+  const content = document.getElementById("content");
+
+  const allVideos = [];
+
+  users.forEach(u => {
+    u.videos.forEach(v => {
+      allVideos.push({ user: u, video: v });
+    });
+  });
+
+  allVideos.sort((a, b) => b.video.views - a.video.views);
+
+  content.innerHTML = `
+    <h2>Accueil</h2>
+
+    <div class="video-grid">
+      ${
+        allVideos.length === 0
+          ? "<p>Aucune vidéo pour l'instant.</p>"
+          : allVideos
+              .map(
+                obj => `
+        <div class="video-card" onclick="openVideo('${obj.user.username}','${obj.video.id}')">
+          <div class="thumbnail" style="background-image:url('${obj.video.thumbnail}')"></div>
+          <div class="video-info">
+            <div class="video-avatar"></div>
+            <div>
+              <div class="video-title">${obj.video.title}</div>
+              <div class="video-meta">@${obj.user.username}</div>
+            </div>
+          </div>
+        </div>
+      `
+              )
+              .join("")
+      }
+    </div>
+  `;
+}
+
+function toggleTheme() {
+  const body = document.body;
+  if (body.classList.contains("theme-dark")) {
+    body.classList.remove("theme-dark");
+    body.classList.add("theme-light");
+  } else {
+    body.classList.remove("theme-light");
+    body.classList.add("theme-dark");
+  }
+}
+
+navigateHome();
+
+
+
+
+    // Le code JS complet sera ajouté dans les parties suivantes
+  </script>
+
+</body>
+</html>
